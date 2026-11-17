@@ -10,15 +10,23 @@ class LLMService:
         )
 
     def generate_answer(self, question, context):
+
+
         prompt = f"""
         You are Gist, an AI research assistant.
 
-        Answer the user's question using only the provided context.
+        Answer the user's question using only the provided document context.
 
-        If the context does not contain enough information,
-        say that the document does not provide enough information.
-
-        Do not invent facts.
+        Rules:
+        1. Answer directly and clearly.
+        2. Use only information supported by the context.
+        3. Include page citations like [Page 3].
+        4. Do not invent facts.
+        5. If the context does not contain enough information,
+        clearly explain what information is missing.
+        6. Do not say the document lacks information if you
+        have already answered the question using the context.
+        7. Do not repeat your answer or add unnecessary conclusions.
 
         DOCUMENT CONTEXT:
         {context}
@@ -30,5 +38,4 @@ class LLMService:
         """
 
         response = self.model.invoke(prompt)
-
         return response.content

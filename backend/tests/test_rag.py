@@ -7,26 +7,31 @@ from app.services.rag_service import RAGService
 
 rag = RAGService()
 
+# Load the document and build retrieval indexes
+chunk_count = rag.load_document(
+    "data/pdf_files/meridian.pdf",
+    document_id="meridian"
+)
+
+print("Chunks loaded:", chunk_count)
+
+# Ask a question
 question = "How does Meridian support end-user customization?"
 
 result = rag.answer_question(question)
 
-print("\n=== GIST RAG RESPONSE ===")
-
+print("\n=== GIST HYBRID RAG RESPONSE ===")
 print("\nQuestion:")
 print(result["question"])
 
 print("\nAnswer:")
 print(result["answer"])
 
-print("\nSources:")
-
+print("\nDetailed Sources:")
 for source in result["sources"]:
     print(
         f"- Document: {source['document_id']}, "
         f"Page: {source['page_number']}, "
         f"Chunk: {source['chunk_id']}"
     )
-
     print(f"  Sections: {source['section_headings']}")
-    print(f"  Distance: {source['distance']:.4f}")

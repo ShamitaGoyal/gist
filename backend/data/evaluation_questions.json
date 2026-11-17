@@ -1,0 +1,143 @@
+{
+  "dataset_id": "meridian-retrieval-v1",
+  "source_pdf": "data/pdf_files/meridian.pdf",
+  "description": "Manually labeled questions for retrieval evaluation. Expected pages are the PDF page numbers produced by pdf_service.extract_pdf. Labels come from the extracted text of the Meridian UIST 2025 paper, not from retrieval output.",
+  "questions": [
+    {
+      "question_id": "q01",
+      "question": "What is an overview-detail interface (ODI)?",
+      "expected_pages": [1],
+      "answerable": true,
+      "question_type": "direct_factual",
+      "notes": "The abstract and introduction on page 1 define an ODI as an overview of multiple items alongside a detailed view of a selected item."
+    },
+    {
+      "question_id": "q02",
+      "question": "What three design dimensions of overview-detail interfaces did Min et al. identify?",
+      "expected_pages": [2],
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "notes": "Section 2.1 names the three dimensions: content, composition, and layout."
+    },
+    {
+      "question_id": "q03",
+      "question": "What do the openIn, openFrom, and openBy properties specify for a Meridian detail view?",
+      "expected_pages": [3],
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "notes": "Section 3.1: openIn is where the detail view opens, openFrom is which attributes open it, and openBy is the selection type, such as click or hover."
+    },
+    {
+      "question_id": "q04",
+      "question": "Why does Meridian define data binding separately from views, unlike Angular and React?",
+      "expected_pages": [3],
+      "answerable": true,
+      "question_type": "relationship",
+      "notes": "Page 3 says Angular and React bind attributes inside views, which makes views hard to interchange. Meridian separates data binding from views so data sources and ODI instances can be swapped and templates reused."
+    },
+    {
+      "question_id": "q05",
+      "question": "In the sample hotel specification, what prefix marks an attribute value that references a field in the data?",
+      "expected_pages": [4],
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "notes": "The Figure 3 annotation on page 4 says attribute values reference data with the prefix '.'."
+    },
+    {
+      "question_id": "q06",
+      "question": "How many default attribute roles does Meridian provide?",
+      "expected_pages": [5],
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "notes": "Page 5 states that Meridian provides a standard with 12 roles to use by default."
+    },
+    {
+      "question_id": "q07",
+      "question": "How does Meridian implement semantic zooming when a user scrolls or pinches?",
+      "expected_pages": [5, 6],
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "notes": "The Figure 6 caption on page 5 and section D1-3 on page 6 say scroll or pinch interactions add or remove attributes in the overview shownAttributes list."
+    },
+    {
+      "question_id": "q08",
+      "question": "What overview layout does dragging one item to the right of another item signal?",
+      "expected_pages": [6],
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "notes": "Section D1-4 on page 6 says dragging an item to the right signals a change to a grid overview."
+    },
+    {
+      "question_id": "q09",
+      "question": "Which three real-world overview-detail interfaces did the developer package reproduce?",
+      "expected_pages": [7],
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "notes": "Section 5.2 names an online smartphone shopping page, a soccer formation view, and a thesaurus."
+    },
+    {
+      "question_id": "q10",
+      "question": "How does the thesaurus specification make the overview and the detail view recursive?",
+      "expected_pages": [8],
+      "answerable": true,
+      "question_type": "relationship",
+      "notes": "Section 5.2.3 on page 8: the detail view has id 'word' and contains an overview, and that overview lists 'word' in its detailViews so it opens the detail view it came from."
+    },
+    {
+      "question_id": "q11",
+      "question": "What workaround did the authors use when a smartphone detail view needed only the first offer in a list?",
+      "expected_pages": [9],
+      "answerable": true,
+      "question_type": "relationship",
+      "notes": "Section 5.4 on page 9 says the specification cannot show an attribute based on its index. The workaround was a separate attribute that contained only the first list element."
+    },
+    {
+      "question_id": "q12",
+      "question": "What does the website builder do when a designer clicks Design Space next to the overview type property?",
+      "expected_pages": [10],
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "notes": "Section 6.1.2 on page 10: the overview multiplies into a grid that shows all of the overview layout types."
+    },
+    {
+      "question_id": "q13",
+      "question": "How can end-users carry customizations such as surfacing calories onto new websites, and how does the discussion compare that kind of customization with sorting and filtering?",
+      "expected_pages": [5, 11],
+      "answerable": true,
+      "question_type": "multi_section",
+      "notes": "Page 5 describes a browser extension that reapplies customizations, including surfacing calories, as a personal lens. Page 11 compares low-friction customization with sorting and filtering, which used to be customization and are now treated as ordinary interaction."
+    },
+    {
+      "question_id": "q14",
+      "question": "Where does the paper place Meridian relative to website tools such as Figma and Wix and component libraries such as Material-UI and Bootstrap?",
+      "expected_pages": [12],
+      "answerable": true,
+      "question_type": "relationship",
+      "notes": "Section 8.1 on page 12 says Meridian sits between broad design platforms like Figma and Wix and component libraries like Material-UI and Bootstrap."
+    },
+    {
+      "question_id": "u01",
+      "question": "What is the authors' favorite food?",
+      "expected_pages": [],
+      "answerable": false,
+      "question_type": "unanswerable",
+      "notes": "The paper never discusses the authors' food preferences."
+    },
+    {
+      "question_id": "u02",
+      "question": "What is Bryan Min's phone number?",
+      "expected_pages": [],
+      "answerable": false,
+      "question_type": "unanswerable",
+      "notes": "Page 1 lists email addresses only. No phone number appears in the paper."
+    },
+    {
+      "question_id": "u03",
+      "question": "How many participants completed the controlled lab study of the Meridian website builder?",
+      "expected_pages": [],
+      "answerable": false,
+      "question_type": "unanswerable",
+      "notes": "The paper mentions informal interviews and internal tests. It does not report a controlled lab study or a participant count."
+    }
+  ]
+}

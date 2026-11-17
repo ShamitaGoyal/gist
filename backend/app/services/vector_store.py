@@ -40,11 +40,27 @@ class VectorStore:
 
         return len(ids)
     
-    def search(self, query_embedding, top_k=3):
+    def search(self, query_embedding, top_k=3, max_distance=0.75):
+
         results = self.collection.query(
             query_embeddings=[query_embedding],
             n_results=top_k,
             include=["documents", "metadatas", "distances"]
         )
 
-        return results
+        # Find the chunks that pass our distance threshold
+        valid_indices = [
+            i
+            for i, distance in enumerate(results["distances"][0])
+            if distance <= max_distance
+        ]
+
+        # Keep only the relevant chunks
+        filtered_results = {
+            "ids": [[results["ids"][0][i] for i in valid_indices]],
+            "documents": [[results["documents"][0][i] for i in valid_indices]],
+            "metadatas": [[results["metadatas"][0][i] for i in valid_indices]],
+            "distances": [[results["distances"][0][i] for i in valid_indices]]
+        }
+
+        return filtered_results

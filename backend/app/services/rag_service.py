@@ -1,61 +1,86 @@
-from app.services.embedding_service import EmbeddingService
-from app.services.vector_store import VectorStore
+
+from app.services.pdf_service import extract_pdf
+from app.services.semantic_chunker import chunk_pages
+from app.services.hybrid_search import HybridSearchService
 from app.services.llm_service import LLMService
 
 
 class RAGService:
-    def __init__(self):
-        self.embedding_service = EmbeddingService()
-        self.vector_store = VectorStore()
+    def __init__(self, chunks=None):
         self.llm_service = LLMService()
+        self.hybrid_search = None
+
+        if chunks is not None:
+            self.hybrid_search = HybridSearchService(chunks)
+
+    def load_document(self, pdf_path, document_id):
+        # 1. Extract text from the PDF
+        pages = extract_pdf(pdf_path)
+
+        # 2. Create semantic chunks
+        chunks = chunk_pages(pages, document_id=document_id)
+
+        # 3. Initialize hybrid search with those chunks
+        self.hybrid_search = HybridSearchService(chunks)
+
+        return len(chunks)
 
     def answer_question(self, question, top_k=3):
+        if self.hybrid_search is None:
+            raise ValueError("Load a document before asking questions.")
 
-        # 1. Convert the user's question into an embedding
-        query_embedding = self.embedding_service.embed_query(question)
+        # 4. Retrieve relevant chunks using hybrid search
+        results = self.hybrid_search.search(question)
 
-        # 2. Search ChromaDB for the most relevant chunks
-        results = self.vector_store.search(
-            query_embedding,
-            top_k=top_k
-        )
+        # 5. Limit the results passed to the LLM
+        results = results[:top_k]
 
-        # 3. Prepare the retrieved text and source information
+        if not results:
+            return {
+                "question": question,
+                "answer": "I couldn't find sufficiently relevant information in the document to answer this question.",
+                "sources": []
+            }
+
         context_parts = []
         sources = []
 
-        for i in range(len(results["ids"][0])):
-
-            document_text = results["documents"][0][i]
-            metadata = results["metadatas"][0][i]
-            chunk_id = results["ids"][0][i]
+        for chunk in results:
+            metadata = chunk.metadata
+            chunk_id = (
+                f"{metadata['document_id']}_"
+                f"{metadata['chunk_index']}"
+            )
 
             context_parts.append(
-                f"Source: {metadata['document_id']}, "
-                f"Page: {metadata['page_number']}\n"
-                f"{document_text}"
+                f"[Source: {metadata['document_id']}, "
+                f"Page: {metadata['page_number']}, "
+                f"Chunk: {chunk_id}]\n"
+                f"{chunk.page_content}"
             )
 
             sources.append({
                 "chunk_id": chunk_id,
                 "document_id": metadata["document_id"],
                 "page_number": metadata["page_number"],
-                "section_headings": metadata["section_headings"],
-                "distance": results["distances"][0][i]
+                "section_headings": metadata["section_headings"]
             })
 
-        # 4. Combine retrieved chunks into one context string
         context = "\n\n".join(context_parts)
 
-        # 5. Ask the LLM to answer using the retrieved context
-        answer = self.llm_service.generate_answer(
-            question=question,
-            context=context
-        )
+        # 6. Generate an answer using the retrieved context
+        answer = self.llm_service.generate_answer(question, context)
 
-        # 6. Return the answer and its sources
+        formatted_answer = answer + "\n\nSources:\n"
+
+        for i, source in enumerate(sources, start=1):
+            formatted_answer += (
+                f"[{i}] {source['document_id']} "
+                f"- Page {source['page_number']}\n"
+            )
+
         return {
             "question": question,
-            "answer": answer,
+            "answer": formatted_answer,
             "sources": sources
         }

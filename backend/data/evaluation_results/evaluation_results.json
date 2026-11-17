@@ -1,0 +1,3147 @@
+{
+  "timestamp": "2026-11-17T07:10:12+00:00",
+  "dataset_id": "meridian-retrieval-v1",
+  "source_pdf": "data/pdf_files/meridian.pdf",
+  "answerable_questions": 14,
+  "unanswerable_questions": 3,
+  "chunk_count": 51,
+  "pages_present": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "configuration": {
+    "top_k": 3,
+    "max_distance": 0.75,
+    "distance_metric": "squared L2, matching Chroma's default space",
+    "embedding_model": "nomic-embed-text",
+    "chroma_collection": "gist_documents",
+    "hybrid_rrf_weights": [
+      0.5,
+      0.5
+    ],
+    "hybrid_rrf_c": 60,
+    "hybrid_per_retriever_k": 3,
+    "latency_repetitions": 3,
+    "warmup_query_excluded_from_metrics": "warmup",
+    "llm_used": false,
+    "hybrid_rejection": "A hybrid chunk is accepted only when its squared L2 distance to the query embedding is <= 0.75. This threshold is the existing VectorStore default. It is not applied to RRF scores, and it was not fit on this question set."
+  },
+  "aggregate_metrics": {
+    "semantic": {
+      "hit_rate": 0.6428571428571429,
+      "precision_at_3": 0.3809524285714286,
+      "recall_at_3": 0.6428571428571429,
+      "mrr": 0.5952380714285714,
+      "unanswerable_rejection_rate": 1.0,
+      "retrieval_coverage": 0.7647058823529411,
+      "average_latency_seconds": 0.021590764705882354
+    },
+    "hybrid": {
+      "hit_rate": 0.9285714285714286,
+      "precision_at_3": 0.5238094999999999,
+      "recall_at_3": 0.9285714285714286,
+      "mrr": 0.7857142857142857,
+      "unanswerable_rejection_rate": 1.0,
+      "retrieval_coverage": 0.7647058823529411,
+      "average_latency_seconds": 0.020302058823529413
+    }
+  },
+  "rejection_sensitivity": {
+    "0.65": {
+      "semantic": 1.0,
+      "hybrid": 1.0
+    },
+    "0.75": {
+      "semantic": 1.0,
+      "hybrid": 1.0
+    },
+    "0.85": {
+      "semantic": 0.6666666666666666,
+      "hybrid": 0.6666666666666666
+    }
+  },
+  "questions": [
+    {
+      "question_id": "q01",
+      "question": "What is an overview-detail interface (ODI)?",
+      "answerable": true,
+      "question_type": "direct_factual",
+      "expected_pages": [
+        1
+      ],
+      "notes": "The abstract and introduction on page 1 define an ODI as an overview of multiple items alongside a detailed view of a selected item.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_19",
+              "page_number": 7,
+              "distance": 0.507063,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_5",
+              "page_number": 3,
+              "distance": 0.519392,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.537114,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            7,
+            3,
+            3
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_19",
+            "meridian_5",
+            "meridian_6"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_19",
+            "meridian_5",
+            "meridian_6"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.018422,
+              0.017284,
+              0.019451
+            ],
+            "average": 0.018386
+          },
+          "hit": false,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "reciprocal_rank": 0.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_19",
+              "page_number": 7,
+              "distance": 0.507063,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_5",
+              "page_number": 3,
+              "distance": 0.519392,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.537114,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.627495,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_19",
+              "page_number": 7,
+              "distance": 0.507063,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_3",
+              "page_number": 2,
+              "distance": 0.730042,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            1,
+            7,
+            2
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_0",
+            "meridian_19",
+            "meridian_3"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_0",
+            "meridian_19",
+            "meridian_3"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.019906,
+              0.020801,
+              0.018519
+            ],
+            "average": 0.019742
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.627495,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_19",
+              "page_number": 7,
+              "distance": 0.507063,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_3",
+              "page_number": 2,
+              "distance": 0.730042,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q02",
+      "question": "What three design dimensions of overview-detail interfaces did Min et al. identify?",
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "expected_pages": [
+        2
+      ],
+      "notes": "Section 2.1 names the three dimensions: content, composition, and layout.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.530857,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.542045,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_34",
+              "page_number": 13,
+              "distance": 0.556501,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            1,
+            9,
+            13
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_0",
+            "meridian_23",
+            "meridian_34"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_0",
+            "meridian_23",
+            "meridian_34"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.021214,
+              0.027165,
+              0.021349
+            ],
+            "average": 0.023243
+          },
+          "hit": false,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "reciprocal_rank": 0.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.530857,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.542045,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_34",
+              "page_number": 13,
+              "distance": 0.556501,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.530857,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_3",
+              "page_number": 2,
+              "distance": 0.670173,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_4",
+              "page_number": 2,
+              "distance": 0.580094,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            1,
+            2,
+            2
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_0",
+            "meridian_3",
+            "meridian_4"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_0",
+            "meridian_3",
+            "meridian_4"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.020085,
+              0.019172,
+              0.021387
+            ],
+            "average": 0.020215
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 0.5,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.530857,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_3",
+              "page_number": 2,
+              "distance": 0.670173,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_4",
+              "page_number": 2,
+              "distance": 0.580094,
+              "relevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q03",
+      "question": "What do the openIn, openFrom, and openBy properties specify for a Meridian detail view?",
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "expected_pages": [
+        3
+      ],
+      "notes": "Section 3.1: openIn is where the detail view opens, openFrom is which attributes open it, and openBy is the selection type, such as click or hover.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.563947,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.584411,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.65697,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            3,
+            3,
+            7
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_7",
+            "meridian_6",
+            "meridian_17"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_7",
+            "meridian_6",
+            "meridian_17"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.021456,
+              0.030304,
+              0.021853
+            ],
+            "average": 0.024537
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.563947,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.584411,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.65697,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.584411,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.563947,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.672153,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            3,
+            3,
+            9
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_6",
+            "meridian_7",
+            "meridian_24"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_6",
+            "meridian_7",
+            "meridian_24"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.022071,
+              0.02215,
+              0.019306
+            ],
+            "average": 0.021176
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.584411,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.563947,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.672153,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q04",
+      "question": "Why does Meridian define data binding separately from views, unlike Angular and React?",
+      "answerable": true,
+      "question_type": "relationship",
+      "expected_pages": [
+        3
+      ],
+      "notes": "Page 3 says Angular and React bind attributes inside views, which makes views hard to interchange. Meridian separates data binding from views so data sources and ODI instances can be swapped and templates reused.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.477841,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.555233,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.563972,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            3,
+            3,
+            9
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_8",
+            "meridian_7",
+            "meridian_24"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_8",
+            "meridian_7",
+            "meridian_24"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.019842,
+              0.018834,
+              0.019173
+            ],
+            "average": 0.019283
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.477841,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.555233,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.563972,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.563972,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_5",
+              "page_number": 3,
+              "distance": 0.677525,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.477841,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            9,
+            3,
+            3
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_24",
+            "meridian_5",
+            "meridian_8"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_24",
+            "meridian_5",
+            "meridian_8"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.024686,
+              0.019146,
+              0.02153
+            ],
+            "average": 0.021787
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 0.5,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.563972,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_5",
+              "page_number": 3,
+              "distance": 0.677525,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.477841,
+              "relevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q05",
+      "question": "In the sample hotel specification, what prefix marks an attribute value that references a field in the data?",
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "expected_pages": [
+        4
+      ],
+      "notes": "The Figure 3 annotation on page 4 says attribute values reference data with the prefix '.'.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_16",
+              "page_number": 6,
+              "distance": 0.621184,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 2,
+              "chunk_id": "meridian_25",
+              "page_number": 10,
+              "distance": 0.764866,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7649 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.801337,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8013 exceeds max_distance 0.75"
+            }
+          ],
+          "retrieved_pages": [
+            6
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_16"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_16"
+          ],
+          "accepted_count": 1,
+          "latency_seconds": {
+            "runs": [
+              0.070813,
+              0.037843,
+              0.041553
+            ],
+            "average": 0.05007
+          },
+          "hit": false,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "reciprocal_rank": 0.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_16",
+              "page_number": 6,
+              "distance": 0.621184,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_25",
+              "page_number": 10,
+              "distance": 0.764866,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.801337,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_22",
+              "page_number": 8,
+              "distance": 0.856133,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_16",
+              "page_number": 6,
+              "distance": 0.621184,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.805318,
+              "relevant": false,
+              "accepted": false
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_22",
+              "page_number": 8,
+              "distance": 0.856133,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8561 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.805318,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8053 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            8,
+            6,
+            5
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_22",
+            "meridian_16",
+            "meridian_11"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_16"
+          ],
+          "accepted_count": 1,
+          "latency_seconds": {
+            "runs": [
+              0.029212,
+              0.026492,
+              0.018872
+            ],
+            "average": 0.024859
+          },
+          "hit": false,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "reciprocal_rank": 0.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_22",
+              "page_number": 8,
+              "distance": 0.856133,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_16",
+              "page_number": 6,
+              "distance": 0.621184,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.805318,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q06",
+      "question": "How many default attribute roles does Meridian provide?",
+      "answerable": true,
+      "question_type": "technical_terminology",
+      "expected_pages": [
+        5
+      ],
+      "notes": "Page 5 states that Meridian provides a standard with 12 roles to use by default.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.575157,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.630658,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.735992,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            5,
+            3,
+            3
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_11",
+            "meridian_8",
+            "meridian_7"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_11",
+            "meridian_8",
+            "meridian_7"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.026662,
+              0.017171,
+              0.017336
+            ],
+            "average": 0.02039
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.575157,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.630658,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.735992,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.575157,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.853228,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.630658,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 2,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.853228,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8532 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            5,
+            11,
+            3
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_11",
+            "meridian_28",
+            "meridian_8"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_11",
+            "meridian_8"
+          ],
+          "accepted_count": 2,
+          "latency_seconds": {
+            "runs": [
+              0.02555,
+              0.022739,
+              0.029204
+            ],
+            "average": 0.025831
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.575157,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.853228,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_8",
+              "page_number": 3,
+              "distance": 0.630658,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q07",
+      "question": "How does Meridian implement semantic zooming when a user scrolls or pinches?",
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "expected_pages": [
+        5,
+        6
+      ],
+      "notes": "The Figure 6 caption on page 5 and section D1-3 on page 6 say scroll or pinch interactions add or remove attributes in the overview shownAttributes list.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.450654,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_14",
+              "page_number": 6,
+              "distance": 0.490849,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.621546,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            6,
+            6,
+            5
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_15",
+            "meridian_14",
+            "meridian_13"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_15",
+            "meridian_14",
+            "meridian_13"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.020346,
+              0.018632,
+              0.018378
+            ],
+            "average": 0.019119
+          },
+          "hit": true,
+          "precision_at_3": 1.0,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.450654,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_14",
+              "page_number": 6,
+              "distance": 0.490849,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.621546,
+              "relevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.450654,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.621546,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_14",
+              "page_number": 6,
+              "distance": 0.490849,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            6,
+            5,
+            6
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_15",
+            "meridian_13",
+            "meridian_14"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_15",
+            "meridian_13",
+            "meridian_14"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.019798,
+              0.018594,
+              0.019071
+            ],
+            "average": 0.019154
+          },
+          "hit": true,
+          "precision_at_3": 1.0,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.450654,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.621546,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_14",
+              "page_number": 6,
+              "distance": 0.490849,
+              "relevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q08",
+      "question": "What overview layout does dragging one item to the right of another item signal?",
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "expected_pages": [
+        6
+      ],
+      "notes": "Section D1-4 on page 6 says dragging an item to the right signals a change to a grid overview.",
+      "systems": {
+        "semantic": {
+          "retrieved": [],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_4",
+              "page_number": 2,
+              "distance": 0.755307,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7553 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.769621,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7696 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_21",
+              "page_number": 8,
+              "distance": 0.782072,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7821 exceeds max_distance 0.75"
+            }
+          ],
+          "retrieved_pages": [],
+          "retrieved_chunk_ids": [],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.021088,
+              0.018895,
+              0.01894
+            ],
+            "average": 0.019641
+          },
+          "hit": false,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "reciprocal_rank": 0.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_4",
+              "page_number": 2,
+              "distance": 0.755307,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.769621,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_21",
+              "page_number": 8,
+              "distance": 0.782072,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.769621,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.805587,
+              "relevant": true,
+              "accepted": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_4",
+              "page_number": 2,
+              "distance": 0.755307,
+              "relevant": false,
+              "accepted": false
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.769621,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7696 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.805587,
+              "relevant": true,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8056 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_4",
+              "page_number": 2,
+              "distance": 0.755307,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7553 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            11,
+            6,
+            2
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_28",
+            "meridian_15",
+            "meridian_4"
+          ],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.020549,
+              0.019249,
+              0.019893
+            ],
+            "average": 0.019897
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 0.5,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_28",
+              "page_number": 11,
+              "distance": 0.769621,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.805587,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_4",
+              "page_number": 2,
+              "distance": 0.755307,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q09",
+      "question": "Which three real-world overview-detail interfaces did the developer package reproduce?",
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "expected_pages": [
+        7
+      ],
+      "notes": "Section 5.2 names an online smartphone shopping page, a soccer formation view, and a thesaurus.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.574849,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.607604,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.640698,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            7,
+            1,
+            9
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_17",
+            "meridian_0",
+            "meridian_23"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_17",
+            "meridian_0",
+            "meridian_23"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.018761,
+              0.018238,
+              0.018451
+            ],
+            "average": 0.018483
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.574849,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.607604,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.640698,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.574849,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.607604,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.807694,
+              "relevant": false,
+              "accepted": false
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 3,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.807694,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8077 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            7,
+            1,
+            6
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_17",
+            "meridian_0",
+            "meridian_15"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_17",
+            "meridian_0"
+          ],
+          "accepted_count": 2,
+          "latency_seconds": {
+            "runs": [
+              0.019511,
+              0.019218,
+              0.019067
+            ],
+            "average": 0.019265
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.574849,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_0",
+              "page_number": 1,
+              "distance": 0.607604,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_15",
+              "page_number": 6,
+              "distance": 0.807694,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q10",
+      "question": "How does the thesaurus specification make the overview and the detail view recursive?",
+      "answerable": true,
+      "question_type": "relationship",
+      "expected_pages": [
+        8
+      ],
+      "notes": "Section 5.2.3 on page 8: the detail view has id 'word' and contains an overview, and that overview lists 'word' in its detailViews so it opens the detail view it came from.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_21",
+              "page_number": 8,
+              "distance": 0.538682,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.591852,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_22",
+              "page_number": 8,
+              "distance": 0.735522,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            8,
+            3,
+            8
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_21",
+            "meridian_7",
+            "meridian_22"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_21",
+            "meridian_7",
+            "meridian_22"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.019424,
+              0.01818,
+              0.019432
+            ],
+            "average": 0.019012
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_21",
+              "page_number": 8,
+              "distance": 0.538682,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.591852,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_22",
+              "page_number": 8,
+              "distance": 0.735522,
+              "relevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_21",
+              "page_number": 8,
+              "distance": 0.538682,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.762749,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.845233,
+              "relevant": false,
+              "accepted": false
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 2,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.762749,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7627 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.845233,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8452 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            8,
+            9,
+            7
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_21",
+            "meridian_24",
+            "meridian_17"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_21"
+          ],
+          "accepted_count": 1,
+          "latency_seconds": {
+            "runs": [
+              0.019784,
+              0.018935,
+              0.020335
+            ],
+            "average": 0.019684
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_21",
+              "page_number": 8,
+              "distance": 0.538682,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.762749,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.845233,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q11",
+      "question": "What workaround did the authors use when a smartphone detail view needed only the first offer in a list?",
+      "answerable": true,
+      "question_type": "relationship",
+      "expected_pages": [
+        9
+      ],
+      "notes": "Section 5.4 on page 9 says the specification cannot show an attribute based on its index. The workaround was a separate attribute that contained only the first list element.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_18",
+              "page_number": 7,
+              "distance": 0.614674,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.685566,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.689707,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            7,
+            3,
+            9
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_18",
+            "meridian_7",
+            "meridian_24"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_18",
+            "meridian_7",
+            "meridian_24"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.023121,
+              0.02069,
+              0.020055
+            ],
+            "average": 0.021289
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 0.333333,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_18",
+              "page_number": 7,
+              "distance": 0.614674,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_7",
+              "page_number": 3,
+              "distance": 0.685566,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.689707,
+              "relevant": true
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.689707,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.726563,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_18",
+              "page_number": 7,
+              "distance": 0.614674,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            9,
+            9,
+            7
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_24",
+            "meridian_23",
+            "meridian_18"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_24",
+            "meridian_23",
+            "meridian_18"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.020039,
+              0.018316,
+              0.017996
+            ],
+            "average": 0.018783
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.689707,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.726563,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_18",
+              "page_number": 7,
+              "distance": 0.614674,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q12",
+      "question": "What does the website builder do when a designer clicks Design Space next to the overview type property?",
+      "answerable": true,
+      "question_type": "meridian_feature",
+      "expected_pages": [
+        10
+      ],
+      "notes": "Section 6.1.2 on page 10: the overview multiplies into a grid that shows all of the overview layout types.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_26",
+              "page_number": 10,
+              "distance": 0.622723,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_27",
+              "page_number": 10,
+              "distance": 0.662934,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.663074,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            10,
+            10,
+            9
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_26",
+            "meridian_27",
+            "meridian_23"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_26",
+            "meridian_27",
+            "meridian_23"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.017843,
+              0.019747,
+              0.018888
+            ],
+            "average": 0.018826
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_26",
+              "page_number": 10,
+              "distance": 0.622723,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_27",
+              "page_number": 10,
+              "distance": 0.662934,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.663074,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_26",
+              "page_number": 10,
+              "distance": 0.622723,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.727257,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_27",
+              "page_number": 10,
+              "distance": 0.662934,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            10,
+            9,
+            10
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_26",
+            "meridian_24",
+            "meridian_27"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_26",
+            "meridian_24",
+            "meridian_27"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.018566,
+              0.020893,
+              0.020151
+            ],
+            "average": 0.01987
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_26",
+              "page_number": 10,
+              "distance": 0.622723,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.727257,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_27",
+              "page_number": 10,
+              "distance": 0.662934,
+              "relevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q13",
+      "question": "How can end-users carry customizations such as surfacing calories onto new websites, and how does the discussion compare that kind of customization with sorting and filtering?",
+      "answerable": true,
+      "question_type": "multi_section",
+      "expected_pages": [
+        5,
+        11
+      ],
+      "notes": "Page 5 describes a browser extension that reapplies customizations, including surfacing calories, as a personal lens. Page 11 compares low-friction customization with sorting and filtering, which used to be customization and are now treated as ordinary interaction.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.534745,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.670479,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_41",
+              "page_number": 13,
+              "distance": 0.706744,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            5,
+            11,
+            13
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_13",
+            "meridian_31",
+            "meridian_41"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_13",
+            "meridian_31",
+            "meridian_41"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.020676,
+              0.022875,
+              0.022097
+            ],
+            "average": 0.021883
+          },
+          "hit": true,
+          "precision_at_3": 0.666667,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.534745,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.670479,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_41",
+              "page_number": 13,
+              "distance": 0.706744,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.670479,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.534745,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_12",
+              "page_number": 5,
+              "distance": 0.722901,
+              "relevant": true,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            11,
+            5,
+            5
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_31",
+            "meridian_13",
+            "meridian_12"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_31",
+            "meridian_13",
+            "meridian_12"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.021329,
+              0.023094,
+              0.02491
+            ],
+            "average": 0.023111
+          },
+          "hit": true,
+          "precision_at_3": 1.0,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 1.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.670479,
+              "relevant": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_13",
+              "page_number": 5,
+              "distance": 0.534745,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_12",
+              "page_number": 5,
+              "distance": 0.722901,
+              "relevant": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "q14",
+      "question": "Where does the paper place Meridian relative to website tools such as Figma and Wix and component libraries such as Material-UI and Bootstrap?",
+      "answerable": true,
+      "question_type": "relationship",
+      "expected_pages": [
+        12
+      ],
+      "notes": "Section 8.1 on page 12 says Meridian sits between broad design platforms like Figma and Wix and component libraries like Material-UI and Bootstrap.",
+      "systems": {
+        "semantic": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.589714,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.602504,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.606274,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            11,
+            7,
+            9
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_31",
+            "meridian_17",
+            "meridian_23"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_31",
+            "meridian_17",
+            "meridian_23"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.019518,
+              0.020119,
+              0.018475
+            ],
+            "average": 0.019371
+          },
+          "hit": false,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "reciprocal_rank": 0.0,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.589714,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.602504,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_23",
+              "page_number": 9,
+              "distance": 0.606274,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.589714,
+              "relevant": false,
+              "accepted": true
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_32",
+              "page_number": 12,
+              "distance": 0.738365,
+              "relevant": true,
+              "accepted": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.734276,
+              "relevant": false,
+              "accepted": true
+            }
+          ],
+          "rejected": [],
+          "retrieved_pages": [
+            11,
+            12,
+            9
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_31",
+            "meridian_32",
+            "meridian_24"
+          ],
+          "accepted_chunk_ids": [
+            "meridian_31",
+            "meridian_32",
+            "meridian_24"
+          ],
+          "accepted_count": 3,
+          "latency_seconds": {
+            "runs": [
+              0.019085,
+              0.018027,
+              0.01852
+            ],
+            "average": 0.018544
+          },
+          "hit": true,
+          "precision_at_3": 0.333333,
+          "recall_at_3": 1.0,
+          "reciprocal_rank": 0.5,
+          "correctly_rejected": null,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.589714,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_32",
+              "page_number": 12,
+              "distance": 0.738365,
+              "relevant": true
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_24",
+              "page_number": 9,
+              "distance": 0.734276,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "u01",
+      "question": "What is the authors' favorite food?",
+      "answerable": false,
+      "question_type": "unanswerable",
+      "expected_pages": [],
+      "notes": "The paper never discusses the authors' food preferences.",
+      "systems": {
+        "semantic": {
+          "retrieved": [],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_49",
+              "page_number": 14,
+              "distance": 0.883204,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8832 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_38",
+              "page_number": 13,
+              "distance": 0.913746,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.9137 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_39",
+              "page_number": 13,
+              "distance": 0.960845,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.9608 exceeds max_distance 0.75"
+            }
+          ],
+          "retrieved_pages": [],
+          "retrieved_chunk_ids": [],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.01762,
+              0.016313,
+              0.016471
+            ],
+            "average": 0.016801
+          },
+          "hit": null,
+          "precision_at_3": null,
+          "recall_at_3": null,
+          "reciprocal_rank": null,
+          "correctly_rejected": true,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_49",
+              "page_number": 14,
+              "distance": 0.883204,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_38",
+              "page_number": 13,
+              "distance": 0.913746,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_39",
+              "page_number": 13,
+              "distance": 0.960845,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_29",
+              "page_number": 11,
+              "distance": 1.205792,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_49",
+              "page_number": 14,
+              "distance": 0.883204,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_27",
+              "page_number": 10,
+              "distance": 1.198163,
+              "relevant": false,
+              "accepted": false
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_29",
+              "page_number": 11,
+              "distance": 1.205792,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 1.2058 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_49",
+              "page_number": 14,
+              "distance": 0.883204,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8832 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_27",
+              "page_number": 10,
+              "distance": 1.198163,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 1.1982 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            11,
+            14,
+            10
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_29",
+            "meridian_49",
+            "meridian_27"
+          ],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.016976,
+              0.015973,
+              0.016493
+            ],
+            "average": 0.01648
+          },
+          "hit": null,
+          "precision_at_3": null,
+          "recall_at_3": null,
+          "reciprocal_rank": null,
+          "correctly_rejected": true,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_29",
+              "page_number": 11,
+              "distance": 1.205792,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_49",
+              "page_number": 14,
+              "distance": 0.883204,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_27",
+              "page_number": 10,
+              "distance": 1.198163,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "u02",
+      "question": "What is Bryan Min's phone number?",
+      "answerable": false,
+      "question_type": "unanswerable",
+      "expected_pages": [],
+      "notes": "Page 1 lists email addresses only. No phone number appears in the paper.",
+      "systems": {
+        "semantic": {
+          "retrieved": [],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_25",
+              "page_number": 10,
+              "distance": 0.951978,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.9520 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_32",
+              "page_number": 12,
+              "distance": 1.100294,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 1.1003 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_2",
+              "page_number": 2,
+              "distance": 1.131951,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 1.1320 exceeds max_distance 0.75"
+            }
+          ],
+          "retrieved_pages": [],
+          "retrieved_chunk_ids": [],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.016917,
+              0.017754,
+              0.016586
+            ],
+            "average": 0.017086
+          },
+          "hit": null,
+          "precision_at_3": null,
+          "recall_at_3": null,
+          "reciprocal_rank": null,
+          "correctly_rejected": true,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_25",
+              "page_number": 10,
+              "distance": 0.951978,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_32",
+              "page_number": 12,
+              "distance": 1.100294,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_2",
+              "page_number": 2,
+              "distance": 1.131951,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_18",
+              "page_number": 7,
+              "distance": 1.298027,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_25",
+              "page_number": 10,
+              "distance": 0.951978,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_14",
+              "page_number": 6,
+              "distance": 1.148845,
+              "relevant": false,
+              "accepted": false
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_18",
+              "page_number": 7,
+              "distance": 1.298027,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 1.2980 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_25",
+              "page_number": 10,
+              "distance": 0.951978,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.9520 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_14",
+              "page_number": 6,
+              "distance": 1.148845,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 1.1488 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            7,
+            10,
+            6
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_18",
+            "meridian_25",
+            "meridian_14"
+          ],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.020988,
+              0.017509,
+              0.017196
+            ],
+            "average": 0.018565
+          },
+          "hit": null,
+          "precision_at_3": null,
+          "recall_at_3": null,
+          "reciprocal_rank": null,
+          "correctly_rejected": true,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_18",
+              "page_number": 7,
+              "distance": 1.298027,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_25",
+              "page_number": 10,
+              "distance": 0.951978,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_14",
+              "page_number": 6,
+              "distance": 1.148845,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "question_id": "u03",
+      "question": "How many participants completed the controlled lab study of the Meridian website builder?",
+      "answerable": false,
+      "question_type": "unanswerable",
+      "expected_pages": [],
+      "notes": "The paper mentions informal interviews and internal tests. It does not report a controlled lab study or a participant count.",
+      "systems": {
+        "semantic": {
+          "retrieved": [],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.789721,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7897 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.823972,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8240 exceeds max_distance 0.75"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.840046,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8400 exceeds max_distance 0.75"
+            }
+          ],
+          "retrieved_pages": [],
+          "retrieved_chunk_ids": [],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.0224,
+              0.018255,
+              0.018215
+            ],
+            "average": 0.019623
+          },
+          "hit": null,
+          "precision_at_3": null,
+          "recall_at_3": null,
+          "reciprocal_rank": null,
+          "correctly_rejected": true,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.789721,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.823972,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_17",
+              "page_number": 7,
+              "distance": 0.840046,
+              "relevant": false
+            }
+          ]
+        },
+        "hybrid": {
+          "retrieved": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.823972,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.962464,
+              "relevant": false,
+              "accepted": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.789721,
+              "relevant": false,
+              "accepted": false
+            }
+          ],
+          "rejected": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.823972,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.8240 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.962464,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.9625 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.789721,
+              "relevant": false,
+              "accepted": false,
+              "reason": "squared L2 distance 0.7897 exceeds max_distance 0.75; RRF rank was not used as a confidence score"
+            }
+          ],
+          "retrieved_pages": [
+            11,
+            5,
+            3
+          ],
+          "retrieved_chunk_ids": [
+            "meridian_31",
+            "meridian_11",
+            "meridian_6"
+          ],
+          "accepted_chunk_ids": [],
+          "accepted_count": 0,
+          "latency_seconds": {
+            "runs": [
+              0.017818,
+              0.017966,
+              0.018732
+            ],
+            "average": 0.018172
+          },
+          "hit": null,
+          "precision_at_3": null,
+          "recall_at_3": null,
+          "reciprocal_rank": null,
+          "correctly_rejected": true,
+          "distance_candidates": [
+            {
+              "rank": 1,
+              "chunk_id": "meridian_31",
+              "page_number": 11,
+              "distance": 0.823972,
+              "relevant": false
+            },
+            {
+              "rank": 2,
+              "chunk_id": "meridian_11",
+              "page_number": 5,
+              "distance": 0.962464,
+              "relevant": false
+            },
+            {
+              "rank": 3,
+              "chunk_id": "meridian_6",
+              "page_number": 3,
+              "distance": 0.789721,
+              "relevant": false
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "charts": {
+    "metric_comparison": "metric_comparison.png",
+    "question_hit_rate": "question_hit_rate.png",
+    "precision_at_3": "precision_at_3.png",
+    "rejection_outcomes": "rejection_outcomes.png",
+    "retrieval_latency": "retrieval_latency.png"
+  }
+}
