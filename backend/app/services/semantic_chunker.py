@@ -95,31 +95,31 @@ if __name__ == "__main__":
     print("Shortest chunk:", min(chunk_lengths))
     print("Longest chunk:", max(chunk_lengths))
 
-    print("\n=== EMPTY CHUNKS ===")
+    # print("\n=== EMPTY CHUNKS ===")
 
-    for chunk in chunks:
-        if not chunk.page_content.strip():
-            print("Empty chunk:", chunk.metadata)
+    # for chunk in chunks:
+    #     if not chunk.page_content.strip():
+    #         print("Empty chunk:", chunk.metadata)
 
 
-    print("\n=== LARGEST CHUNKS ===")
+    # print("\n=== LARGEST CHUNKS ===")
 
-    largest_chunks = sorted(
-        chunks,
-        key=lambda chunk: len(chunk.page_content),
-        reverse=True
-    )
+    # largest_chunks = sorted(
+    #     chunks,
+    #     key=lambda chunk: len(chunk.page_content),
+    #     reverse=True
+    # )
 
-    for chunk in largest_chunks[:5]:
-        print("\nChunk index:", chunk.metadata["chunk_index"])
-        print("Page:", chunk.metadata["page_number"])
-        print("Characters:", len(chunk.page_content))
-        print("Preview:", chunk.page_content[:300])
+    # for chunk in largest_chunks[:5]:
+    #     print("\nChunk index:", chunk.metadata["chunk_index"])
+    #     print("Page:", chunk.metadata["page_number"])
+    #     print("Characters:", len(chunk.page_content))
+    #     print("Preview:", chunk.page_content[:300])
     
-    print("\n=== CHUNK BOUNDARIES ===")
+    # print("\n=== CHUNK BOUNDARIES ===")
 
-    for chunk in chunks:
-        print(f"\nChunk {chunk.metadata['chunk_index']}")
-        print("Page:", chunk.metadata["page_number"])
-        print("Start:", chunk.page_content[:150].replace("\n", " "))
-        print("End:", chunk.page_content[-150:].replace("\n", " "))
+    # for chunk in chunks:
+    #     print(f"\nChunk {chunk.metadata['chunk_index']}")
+    #     print("Page:", chunk.metadata["page_number"])
+    #     print("Start:", chunk.page_content[:150].replace("\n", " "))
+    #     print("End:", chunk.page_content[-150:].replace("\n", " "))
