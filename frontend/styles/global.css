@@ -1,0 +1,76 @@
+/*
+  Gist design tokens.
+
+  Change these values to restyle the application. Tailwind utilities read them
+  through app/globals.css. The palette is white and monochrome.
+*/
+
+:root {
+  --gist-canvas: #ffffff;
+  --gist-sidebar: #ffffff;
+  --gist-surface: #ffffff;
+  --gist-ink: #171717;
+  --gist-ink-hover: #262626;
+  --gist-on-ink: #ffffff;
+  --gist-text-secondary: #525252;
+  --gist-text-muted: #737373;
+  --gist-text-disabled: #a3a3a3;
+  --gist-border: #e5e5e5;
+  --gist-border-subtle: #f0f0f0;
+  --gist-border-strong: #d4d4d4;
+  --gist-selected: #f4f4f5;
+  --gist-hover: #f7f7f7;
+  --gist-user: #e7f1fb;
+  --gist-success: #5f675c;
+  --gist-success-surface: #f3f4f0;
+  --gist-danger: #8a5348;
+  --gist-danger-surface: #f7f2f0;
+  --gist-font-sans: var(--font-inter), "Segoe UI", sans-serif;
+  --gist-font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --gist-panel-library: 248px;
+  --gist-panel-chat: 360px;
+}
+
+@keyframes gist-gleam {
+  0% { background-position: 120% 0; }
+  100% { background-position: -120% 0; }
+}
+
+@keyframes gist-blink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.gist-gleam {
+  background-image: linear-gradient(100deg, #a3a3a3 15%, #171717 40%, #f5f5f5 50%, #171717 60%, #a3a3a3 85%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gist-gleam 1.5s linear infinite;
+}
+
+.gist-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  background: #171717;
+  vertical-align: text-bottom;
+  animation: gist-blink 0.9s steps(1) infinite;
+}
+
+body {
+  margin: 0;
+  background: var(--gist-canvas);
+  color: var(--gist-ink);
+  font-family: var(--gist-font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+:focus-visible {
+  outline: 1px solid var(--gist-ink);
+  outline-offset: 2px;
+}

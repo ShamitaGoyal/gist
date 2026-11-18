@@ -29,6 +29,16 @@ class DocumentRegistry:
             raise DocumentNotFound(document_id)
         return dict(records[document_id])
 
+    def rename_document(self, document_id, filename):
+        """Change the display name. The stored PDF path stays the same."""
+
+        records = self._read()
+        if document_id not in records:
+            raise DocumentNotFound(document_id)
+        records[document_id]["filename"] = filename
+        self._write(records)
+        return dict(records[document_id])
+
     def remove_document(self, document_id):
         """Drop one registry record. The caller deletes the file and index."""
 

@@ -22,6 +22,12 @@ class DocumentDetail(DocumentSummary):
     error: str | None = Field(description="Public ingestion error, if the latest attempt failed.")
 
 
+class RenameDocumentRequest(BaseModel):
+    """A new display name for one uploaded PDF."""
+
+    filename: str = Field(min_length=1, max_length=180)
+
+
 class DeleteDocumentResponse(BaseModel):
     """Confirmation that one document was removed."""
 

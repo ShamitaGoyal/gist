@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "../styles/global.css";
+
+@theme inline {
+  --color-canvas: var(--gist-canvas);
+  --color-sidebar: var(--gist-sidebar);
+  --color-surface: var(--gist-surface);
+  --color-ink: var(--gist-ink);
+  --color-ink-hover: var(--gist-ink-hover);
+  --color-on-ink: var(--gist-on-ink);
+  --color-secondary: var(--gist-text-secondary);
+  --color-muted: var(--gist-text-muted);
+  --color-disabled: var(--gist-text-disabled);
+  --color-line: var(--gist-border);
+  --color-line-subtle: var(--gist-border-subtle);
+  --color-line-strong: var(--gist-border-strong);
+  --color-selected: var(--gist-selected);
+  --color-hover: var(--gist-hover);
+  --color-user: var(--gist-user);
+  --color-success: var(--gist-success);
+  --color-success-surface: var(--gist-success-surface);
+  --color-danger: var(--gist-danger);
+  --color-danger-surface: var(--gist-danger-surface);
+  --font-sans: var(--gist-font-sans);
+  --font-mono: var(--gist-font-mono);
+}

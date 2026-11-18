@@ -1,0 +1,38 @@
+{
+  "28da82f07d4e40238670a5724e6e639d": {
+    "document_id": "28da82f07d4e40238670a5724e6e639d",
+    "filename": "Meridian.pdf",
+    "file_path": "data/uploads/28da82f07d4e40238670a5724e6e639d/meridian.pdf",
+    "ingestion_status": "success",
+    "total_pages": 14,
+    "total_chunks": 61,
+    "total_embeddings": 61,
+    "created_at": "2026-11-18T08:32:49+00:00",
+    "last_ingestion_at": "2026-11-18T08:32:49+00:00",
+    "error": null
+  },
+  "1b662ff4601e46868024184a09910280": {
+    "document_id": "1b662ff4601e46868024184a09910280",
+    "filename": "Modeling and Synthesizing Idiopathic Facial Paralysis.pdf",
+    "file_path": "data/uploads/1b662ff4601e46868024184a09910280/sample.pdf",
+    "ingestion_status": "success",
+    "total_pages": 8,
+    "total_chunks": 44,
+    "total_embeddings": 44,
+    "created_at": "2026-11-18T09:22:00+00:00",
+    "last_ingestion_at": "2026-11-18T09:22:00+00:00",
+    "error": null
+  },
+  "a072993039df49db9399cf3db7536841": {
+    "document_id": "a072993039df49db9399cf3db7536841",
+    "filename": "CrossCode.pdf",
+    "file_path": "data/uploads/a072993039df49db9399cf3db7536841/CrossCode.pdf",
+    "ingestion_status": "success",
+    "total_pages": 14,
+    "total_chunks": 60,
+    "total_embeddings": 60,
+    "created_at": "2026-11-18T10:28:43+00:00",
+    "last_ingestion_at": "2026-11-18T10:28:43+00:00",
+    "error": null
+  }
+}

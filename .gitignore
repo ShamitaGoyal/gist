@@ -48,6 +48,12 @@ htmlcov/
 # Jupyter
 .ipynb_checkpoints/
 
+# Frontend build output
+node_modules/
+.next/
+frontend/public/pdf.worker.min.mjs
+frontend/public/pdf.min.mjs
+
 # Local databases and generated vector stores
 *.sqlite
 *.sqlite3

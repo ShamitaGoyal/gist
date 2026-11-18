@@ -6,6 +6,7 @@ import uuid
 from pathlib import Path
 
 from fastapi import APIRouter, File, UploadFile
+from fastapi.responses import FileResponse
 
 from app.api.dependencies import ContainerDep
 from app.api.errors import APIError, public_message
@@ -13,6 +14,7 @@ from app.schemas.document import (
     DeleteDocumentResponse,
     DocumentDetail,
     DocumentSummary,
+    RenameDocumentRequest,
 )
 from app.services.document_registry import DocumentNotFound
 from app.services.ingestion_service import IngestionError
@@ -56,11 +58,43 @@ def list_documents(container: ContainerDep):
     return [_summary(record) for record in container.registry.list_documents()]
 
 
+@router.get("/{document_id}/file")
+def get_document_file(document_id: str, container: ContainerDep):
+    """Send the stored PDF for one document.
+
+    The browser needs the file bytes to render pages. The response is the
+    PDF itself. Storage paths stay on the server.
+    """
+
+    record = _require_record(container, document_id)
+    path = _resolved_upload(container.upload_dir, record.get("file_path"))
+    if path is None or not path.is_file():
+        raise APIError(404, "The PDF file is not available.")
+    return FileResponse(
+        path,
+        media_type="application/pdf",
+        filename=record["filename"],
+        content_disposition_type="inline",
+    )
+
+
 @router.get("/{document_id}", response_model=DocumentDetail)
 def get_document(document_id: str, container: ContainerDep):
     """Return one document's ingestion status."""
 
     return _detail(_require_record(container, document_id))
+
+
+@router.patch("/{document_id}", response_model=DocumentDetail)
+def rename_document(document_id: str, body: RenameDocumentRequest, container: ContainerDep):
+    """Change the name shown for one PDF. The stored file is left in place."""
+
+    _require_record(container, document_id)
+    try:
+        record = container.registry.rename_document(document_id, _display_name(body.filename))
+    except DocumentNotFound:
+        raise APIError(404, "Document not found.") from None
+    return _detail(record)
 
 
 @router.delete("/{document_id}", response_model=DeleteDocumentResponse)
@@ -117,6 +151,18 @@ def _detail(record, stats=None):
     )
 
 
+def _display_name(filename):
+    cleaned = " ".join((filename or "").replace("\\", " ").replace("/", " ").split())
+    cleaned = "".join(character for character in cleaned if character.isprintable()).strip(" .")
+    if not cleaned:
+        raise APIError(400, "Enter a document name.")
+    if len(cleaned) > 180:
+        cleaned = cleaned[:180].rstrip(" .")
+    if not cleaned.lower().endswith(".pdf"):
+        cleaned = f"{cleaned}.pdf"
+    return cleaned
+
+
 def _safe_pdf_name(filename):
     base = Path(filename or "document.pdf").name
     stem = _SAFE_NAME.sub("_", Path(base).stem).strip("._")[:80]
@@ -139,17 +185,26 @@ def _destination(upload_dir, document_id, filename):
     return folder / filename
 
 
-def _remove_upload(upload_dir, file_path):
+def _resolved_upload(upload_dir, file_path):
+    """Return a stored PDF only when it lives inside the upload directory."""
+
     if not file_path:
-        return
+        return None
     path = Path(file_path).resolve()
     root = upload_dir.resolve()
-    if root != path and root not in path.parents:
-        logger.error("Refusing to delete a file outside the upload directory")
+    if path != root and root not in path.parents:
+        logger.error("Refusing to use a file outside the upload directory")
+        return None
+    return path
+
+
+def _remove_upload(upload_dir, file_path):
+    path = _resolved_upload(upload_dir, file_path)
+    if path is None:
         return
     path.unlink(missing_ok=True)
     parent = path.parent
-    if parent != root:
+    if parent != upload_dir.resolve():
         try:
             parent.rmdir()
         except OSError:

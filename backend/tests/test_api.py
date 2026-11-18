@@ -135,6 +135,20 @@ def test_rejected_uploads(client):
     print("Invalid, empty, and oversized uploads were rejected.")
 
 
+def test_rename_document(client):
+    registry = client.app.state.container.registry
+    registry.record_failure("alpha", "data/uploads/alpha/sample.pdf", "not ingested")
+    renamed = client.patch("/api/documents/alpha", json={"filename": "Hotel specification"})
+    assert renamed.status_code == 200, renamed.text
+    assert renamed.json()["filename"] == "Hotel specification.pdf"
+    assert registry.get_document("alpha")["file_path"].endswith("sample.pdf")
+    blank = client.patch("/api/documents/alpha", json={"filename": "   "})
+    assert blank.status_code == 400
+    missing = client.patch("/api/documents/missing", json={"filename": "Other"})
+    assert missing.status_code == 404
+    print("Document rename passed.")
+
+
 def test_library_questions_and_deletion(client, store):
     directory = Path(tempfile.mkdtemp())
     first_path = directory / "meridian-a.pdf"
@@ -175,6 +189,15 @@ def test_library_questions_and_deletion(client, store):
     missing = client.get("/api/documents/does-not-exist")
     assert missing.status_code == 404
 
+    pdf = client.get(f"/api/documents/{first['document_id']}/file")
+    assert pdf.status_code == 200
+    assert pdf.headers["content-type"].startswith("application/pdf")
+    assert pdf.content.startswith(b"%PDF")
+    disposition = pdf.headers.get("content-disposition", "")
+    assert "meridian-a.pdf" in disposition
+    assert str(directory) not in disposition
+    assert client.get("/api/documents/does-not-exist/file").status_code == 404
+
     blank = client.post(
         f"/api/documents/{first['document_id']}/ask",
         json={"question": "   "},
@@ -205,6 +228,7 @@ def test_library_questions_and_deletion(client, store):
     assert deleted.status_code == 200
     assert deleted.json()["deleted"] is True
     assert client.get(f"/api/documents/{first['document_id']}").status_code == 404
+    assert client.get(f"/api/documents/{first['document_id']}/file").status_code == 404
     assert client.get(f"/api/documents/{second['document_id']}").status_code == 200
     assert store.documents_for(first["document_id"]) == []
     assert store.documents_for(second["document_id"])
@@ -218,6 +242,7 @@ def main():
         client, llm, store = make_client(directory, max_upload_bytes=50)
         test_health_and_usage(client, llm)
         test_rejected_uploads(client)
+        test_rename_document(client)
         client.close()
 
         client, llm, store = make_client(directory, max_upload_bytes=2_000_000)
