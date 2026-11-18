@@ -1,0 +1,6 @@
+# Required for PDF upload requests.
+python-multipart
+
+# Optional. Required only when LLM_PROVIDER=gemini.
+# Embeddings stay on the local Ollama nomic-embed-text model.
+google-genai

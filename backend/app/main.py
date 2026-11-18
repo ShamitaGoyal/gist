@@ -1,14 +1,7 @@
-from fastapi import FastAPI
+import logging
 
-app = FastAPI(title="Gist API")
+from app.api.application import create_app
 
-@app.get("/")
-async def root():
-    return {"message": "Gist API is running!"}
 
-@app.get("/api/health")
-def health_check():
-    return {
-        "status": "healthy",
-        "application": "Gist"
-    }
+logging.basicConfig(level=logging.INFO)
+app = create_app()
