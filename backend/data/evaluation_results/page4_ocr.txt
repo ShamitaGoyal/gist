@@ -1,0 +1,197 @@
+UIST '25, September 28-October 01, 2025, Busan, Republic of Korea
+Bryan Min and Haijun Xia
+1 {
+2
+dataBinding: [{
+id: "query",
+Data Binding Specification
+binding: {
+Reference the data source for data binding
+5
+itemId: ".itemId",
+6
+attributes: [
+7
+value: ".name", roles: ["title"] },
+Reference values from data with the prefix "."
+8
+9
+value: ".details.photo",
+10
+type: "image",
+Assign attributes with type to describe how they are
+11
+roles: ["thumbnail"]
+rendered and roles map to where they are shown in
+12
+},
+the view.
+13
+value: ".details.rating", roles: ["subtitle"], },
+14
+15
+roles: ["subtitle"],
+16
+attributes: [
+Attributes can contain multiple attributes.
+17
+value: ".address_obj.street1" },
+18
+19
+value: ".address_obj.street2",
+20
+condition: { exists: ".address_obj.street2" }
+Conditionals can determine whether an attribute
+21
+should or should not be rendered.
+22
+{ value: ".address_obj.city" },
+23
+{ value: ".address_obj.country" },
+24
+1
+25
+},
+26
+value: ".details.price_level", roles: ["tag"] },
+27
+28
+value: ".details.amenities",
+Attributes carrying lists of attributes can transform
+29
+roles: ["spec"],
+into an attribute group by mapping or filtering.
+30
+transform: [{ map: ".amenity" }]
+31
+},
+32
+],
+33
+}
+34
+}],
+35
+overviews: [
+36
+View Specification
+37
+7
+type: "list",
+Define the overview type. Other properties can
+39
+38
+itemView: { type: "compact" },
+shownAttributes: ["title", "subtitle", "thumbnail",
+additionally be defined such as the item view type
+list with compact items
+40
+"key-attribute", "action", "link"]
+and which attributes to show.
+41
+},
+42
+{
+43
+type: "grid",
+44
+detailViews: [
+click "title"
+45
+open side-by-side
+46
+8
+type: "full",
+Detail views are defined inside overviews, and can be
+47
+openFrom: ["title"],
+defined with a type, which specifies the elements that
+48
+openIn: "side-by-side",
+49
+openBy: "click",
+open the view, where to open it in, and how to select it.
+50
+51
+overviews: [
+Compose views in detail views.
+52
+53
+10
+showIn: "footer",
+54
+bindingId: "recommended",
+Specify where to display composed overviews.
+carousel
+55
+type: "carousel"
+Overviews can also reference different data sources
+56
+with bindingId, such as a list of recommended items.
+57
+58
+59
+detailViews: [
+gallery detail view
+60
+①
+type: "gallery",
+Detail views can also specify which attributes to
+61
+62
+openFrom: ["thumbnail"],
+shownAttributes: ["thumbnail"]
+show or hide.
+63
+{
+64
+1
+65
+{
+66
+],
+67
+},
+68
+],
+69
+detailViews: [
+Define detail views independently from overviews.
+70
+12
+{ id: "article", type: "article" }
+Overviews can reference external detail views via id.
+71
+72
+malleability: {
+73
+content:
+Malleability Specification
+74
+75
+76
+},
+composition: {
+types: ["toggle"]
+Specify malleability features for each dimension, and
+how the features are shown in the UI.
+toggle to customize
+77
+disabled: true
+shown attributes
+78
+All malleability features are enabled by default, but
+79
+layout: {
+can be disabled through the specification.
+80
+types: ["menus"]
+81
+}
+82
+}
+{ε8
+Figure 3: The Meridian specification is made up of three main components: data binding, views, and malleability. First, data
+binding describes the mapping from a data source to attributes rendered in the ODI. Second, views describe what attributes
+are shown in which views, how views are composed, layouts of items, and how detail views are opened. Lastly, malleability
+specifies which customizations the end-user will have access to.
